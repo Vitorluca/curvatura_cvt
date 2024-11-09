@@ -8,6 +8,7 @@
 int32_t pin_rpm = 36;
 int rpm = 0;
 int pulse_count = 0;
+char buffer[40];
 
 
 void IRAM_ATTR funcao_ISR(){
@@ -74,7 +75,9 @@ void loop() {
   Serial.print("RPM: ");
   Serial.println(rpm);
 
-  writeFile(SD, "/data_log.csv", "Hello\n"); // Write file in sd card
+  sprintf(buffer, "%d", rpm);
+
+  writeFile(SD, "/data_log.csv", buffer); // Write file in sd card
 
   delay(100);
 }
